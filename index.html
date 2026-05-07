@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<input id="word">
+<button onclick="sendWord()">Send</button>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+
+import {
+  getDatabase,
+  ref,
+  set
+} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "YOUR_KEY",
+  authDomain: "...",
+  databaseURL: "...",
+  projectId: "...",
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+window.sendWord = function() {
+
+  const word = document.getElementById("word").value;
+
+  set(ref(db, 'word'), {
+    text: word
+  });
+}
+
+</script>
+
+</body>
+</html>
